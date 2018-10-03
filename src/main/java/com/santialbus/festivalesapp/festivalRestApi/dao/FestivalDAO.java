@@ -85,4 +85,17 @@ public class FestivalDAO {
     	response.addHeader("Access-Control-Allow-Credentials", "true");
         return (List<Festival>) query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Festival> getUsuarioGenreEqualFestivalGenres(String user_name, HttpServletResponse response) {
+		//SELECT * FROM festival INNER JOIN usuario ON festival.genero=usuario.genero_favorito WHERE usuario.user_name = 'AlbusAllDay'
+		//select f.id, f.name, f.descripcion, f.genero, f.precio, f.dias, f.fecha_ini, f.fecha_fin from Usuario u, Festival f where u.user_name = '"+user_name+"' AND u.genero_favorito = f.genero
+		Query query = entityManager.createQuery("select f from Festival f inner join Usuario u on f.genero=u.genero_favorito where u.user_name = '"+user_name+"'");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+    	response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE, PUT");
+    	response.addHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization, X-Request-With, X-CLIENT-ID, X-CLIENT-SECRET");
+    	response.addHeader("Access-Control-Allow-Credentials", "true");
+    	return (List<Festival>) query.getResultList();
+	}
+	
 }

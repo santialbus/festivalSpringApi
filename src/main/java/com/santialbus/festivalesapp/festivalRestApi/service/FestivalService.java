@@ -49,4 +49,9 @@ public class FestivalService {
 		festivalDao.deleteFest(id, response);
 	}
 	
+	@Transactional
+	public List<Festival> getUsuarioAndRecommendedFestival(String user_name, HttpServletResponse response) {
+		return festivalDao.getUsuarioGenreEqualFestivalGenres(user_name, response);
+	}
+	
 }
